@@ -2,7 +2,9 @@ class NeighborhoodsController < ApplicationController
 
   def index
     @neighborhoods = Neighborhood.all
-    render json: @neighborhoods
+    @sorted = @neighborhoods.reject {|hood| hood.name == nil }.sort_by &:name
+    render json: @sorted
+
   end
 
   def show
